@@ -1,0 +1,10 @@
+{
+  "name": "Advanced_Resource_Procurement",
+  "version": "0.1.0",
+  "title": "Advanced Resource Procurement",
+  "author": "Matok",
+  "contact": "hunt.b80@gmail.com",
+  "homepage": "http://github.com/MatokHunt/Factorio",
+  "description": "Adds ore veins, a new energy resource, and new mining and drilling equipment.",
+  "dependencies": ["base >= 0.12.26"]
+}
