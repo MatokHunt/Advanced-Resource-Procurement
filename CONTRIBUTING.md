@@ -10,7 +10,7 @@ If you happen to find a reproduceable bug while using this mod, you can create a
 
 ## Suggestions
 
-If you have an idea that you would like to suggest for the mod, you may do so by creating a new [Issue](https://github.com/MatokHunt/Advanced-Resource-Procurement/issues) and explaining in detail what enhancemenmt you're thinking about.
+If you have an idea that you would like to suggest for the mod, you may do so by creating a new [Issue](https://github.com/MatokHunt/Advanced-Resource-Procurement/issues) and explaining in detail what enhancement you're thinking about. New ideas are welcome, but do keep in mind that ideas that do not align with the mod's vision of adding interesting changes to Factorio's mid to late game resource procurement will likely not be considered.
 
 ## Code and Asset Contributions
 
