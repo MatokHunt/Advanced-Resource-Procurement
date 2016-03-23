@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "title": "Advanced Resource Procurement",
   "author": "Matok",
-  "contact": "hunt.b80@gmail.com",
-  "homepage": "http://github.com/MatokHunt/Factorio",
-  "description": "Adds ore veins, a new energy resource, and new mining and drilling equipment.",
+  "contact": "",
+  "homepage": "http://github.com/MatokHunt/Advanced-Resource-Procurement",
+  "description": "Adds new resource procurement options, a new source of energy, and changes to liquid resource generation.",
   "dependencies": ["base >= 0.12.26"]
 }
