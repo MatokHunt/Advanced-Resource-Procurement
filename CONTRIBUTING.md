@@ -2,7 +2,7 @@
 
 Thanks for showing interest in contributing to the project!
 
-The following are a few simple guidelines for contributing to the project, as well as a quick Q&A on how you can contribute.
+The following are a few simple guidelines for contributing to the project.
 
 ## Reporting Bugs
 
