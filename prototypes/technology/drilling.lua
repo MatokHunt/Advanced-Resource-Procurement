@@ -2,7 +2,7 @@
 {
   {
     type = "technology",
-    name = "advanced-ore-processing",
+    name = "advanced-recovery-techniques",
     icon = "__base__/graphics/technology/oil-processing.png",
     prerequisites = {"oil-processing"},
     effects =
@@ -20,7 +20,7 @@
                      {"science-pack-3", 1}},
       time = 30
     },
-    order = "d-f"
+    order = "d-g"
   },
 }
 )

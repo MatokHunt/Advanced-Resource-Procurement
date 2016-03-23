@@ -19,6 +19,7 @@ require("prototypes.recipe.fluids")
 
 -- Technology
 require("prototypes.technology.chemistry")
+require("prototypes.technology.drilling")
 
 -- Tile
 require("prototypes.tile.noise-layers")

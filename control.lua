@@ -1,9 +1,5 @@
 require "defines"
-
--- Mod Settings
-local debug_mode = true
-local vein_area = 7				-- Used to define the minimum distance allowed between ore vein spawns.
-local starting_area = 400		-- Used to define the minimum distance from the starting area before ore veins can spawn.
+require "config"
 
 script.on_init(function()
   pcall(function()
@@ -16,10 +12,11 @@ end)
 
 script.on_event(defines.events.on_player_created, function(event)
   pcall(function()
-		if debug_mode then 
+		if arpconfig.debug_mode then 
 			-- If we're in debug mode, then give ourselves some stuff to test with.
 			game.player.insert{name = "deep-bore-drill", count = 1}
 			game.player.insert{name = "drill-rig", count = 1}
+			game.player.insert{name = "drill-bit", count = 5}
 			game.player.insert{name = "solar-panel", count = 40}
 			game.player.insert{name = "medium-electric-pole", count = 40}
 			game.player.insert{name = "steel-chest", count = 40}
@@ -54,7 +51,10 @@ script.on_event(defines.events.on_tick, function(event)
 				table.remove(global.drillrigs, i)
 				-- ToDo: Addtional check for valid well under rig.
 			elseif rig.is_crafting then
-				-- The rig is currently drilling a well, put the placeholder well here.
+			  -- The rig is currently drilling a well, put the placeholder well here.
+			  if game.get_surface(1).find_entity("oil-well",rig.position) == nil then
+				  game.get_surface(1).create_entity({name = "oil-well", amount=1, position = rig.position})
+				end
 			elseif not rig.is_crafting then
 				-- If placeholder well is here, then rig has finished drilling. Finish up the well.
 			end
@@ -65,36 +65,36 @@ script.on_event(defines.events.on_tick, function(event)
 end)
 
 script.on_event(defines.events.on_resource_depleted, function(event)
-  if event.entity.position.x < -starting_area or
-		event.entity.position.y < -starting_area or
-		event.entity.position.x > starting_area or
-		event.entity.position.y > starting_area then
+  if event.entity.position.x < -arpconfig.starting_area or
+		event.entity.position.y < -arpconfig.starting_area or
+		event.entity.position.x > arpconfig.starting_area or
+		event.entity.position.y > arpconfig.starting_area then
 		-- We're not in the starting area, so let's check what kind of resource was depleted.
 		-- If we don't find any ore-veins of the same type within the minimum distance, then spawn a new ore-vein entity.
     if event.entity.name == "iron-ore" then
       if game.get_surface(1).count_entities_filtered{
-				area = {{event.entity.position.x - vein_area,event.entity.position.y - vein_area}, 
-				{event.entity.position.x + vein_area,event.entity.position.y + vein_area}}, 
+				area = {{event.entity.position.x - arpconfig.vein_area,event.entity.position.y - arpconfig.vein_area}, 
+				{event.entity.position.x + arpconfig.vein_area,event.entity.position.y + arpconfig.vein_area}}, 
 				name="iron-vein"} <= 0 then
         game.get_surface(1).create_entity({name = "iron-vein", amount=7500, position = event.entity.position})
       end 
 		elseif event.entity.name == "copper-ore" then
 			if game.get_surface(1).count_entities_filtered{
-				area = {{event.entity.position.x - vein_area,event.entity.position.y - vein_area}, 
-				{event.entity.position.x + vein_area,event.entity.position.y + vein_area}}, 
+				area = {{event.entity.position.x - arpconfig.vein_area,event.entity.position.y - arpconfig.vein_area}, 
+				{event.entity.position.x + arpconfig.vein_area,event.entity.position.y + arpconfig.vein_area}}, 
 				name="copper-vein"} <= 0 then
         game.get_surface(1).create_entity({name = "copper-vein", amount=7500, position = event.entity.position})
       end 
 		elseif event.entity.name == "coal" then
 			if game.get_surface(1).count_entities_filtered{
-				area = {{event.entity.position.x - vein_area,event.entity.position.y - vein_area}, 
-				{event.entity.position.x + vein_area,event.entity.position.y + vein_area}}, 
+				area = {{event.entity.position.x - arpconfig.vein_area,event.entity.position.y - arpconfig.vein_area}, 
+				{event.entity.position.x + arpconfig.vein_area,event.entity.position.y + arpconfig.vein_area}}, 
 				name="coal-vein"} <= 0 then
         game.get_surface(1).create_entity({name = "coal-vein", amount=7500, position = event.entity.position})
       end 
     end 
   else
-    if debug_mode then game.player.print("No Veins In Starting Area.") end 
+    if arpconfig.debug_mode then game.player.print("No Veins In Starting Area.") end 
   end
 end)
 
@@ -140,13 +140,13 @@ function check_for_wells(position, range)
 end 
 
 script.on_event(defines.events.on_put_item, function(event)
-  if debug_mode then 
+  if arpconfig.debug_mode then 
     -- Test code, only active with debug mode on.
-    game.player.print("Something placed at " .. event.position.x .. "," .. event.position.y)
+    --game.player.print("Something placed at " .. event.position.x .. "," .. event.position.y)
   
-		if check_for_water(event.position, 50) then game.player.print("Water Found Within " .. 50) else game.player.print("No Water Within " .. 50) end
+		--if check_for_water(event.position, 50) then game.player.print("Water Found Within " .. 50) else game.player.print("No Water Within " .. 50) end
 	
-		if check_for_wells(event.position, 25) then game.player.print("Well Found Within " .. 25) else game.player.print("No Wells Within " .. 25) end
+		--if check_for_wells(event.position, 25) then game.player.print("Well Found Within " .. 25) else game.player.print("No Wells Within " .. 25) end
   end 
 end)
 

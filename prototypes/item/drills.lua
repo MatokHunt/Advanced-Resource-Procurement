@@ -39,6 +39,15 @@ data:extend(
     order = "a[items]-z[drill-rig-near-wells]",
     place_result = "drill-rig-near-wells",
     stack_size = 50
+  },
+  {
+    type = "item",
+    name = "drill-bit",
+    icon = "__base__/graphics/icons/engine-unit.png",
+    flags = {"goes-to-main-inventory"},
+    subgroup = "intermediate-product",
+    order = "z[drill-bit]",
+    stack_size = 5
   }
 }
 )
